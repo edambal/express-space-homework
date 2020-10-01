@@ -12,17 +12,15 @@ for(let i=0;i<marsM.length;i++){
     marsM[i]['img'] = images[i];
 }
 
-router.get('/',(req,res)=>{
-    res.send("This is what it is");
-})
 
-router.get('/missions',(req,res)=>{
+
+router.get('/',(req,res)=>{
     res.render('index',{
         missions : marsM
     })
 });
 
-router.get('/missions/:id',(req,res)=>{
+router.get('/:id',(req,res)=>{
     res.render('./missions/showmissions',{
         mission : marsM[req.params.id]
     })
