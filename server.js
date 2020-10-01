@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 
 
@@ -28,23 +29,38 @@ const port = 3000;
 // remember to require it in the server
   app.set('view engine','ejs');
   const marsM = require('./models/marsMissions');
+  const marsCtrl = require('./controller/marsController');
 
 // INDEX Route
 // send data to 'missions/index.ejs' view
 // the view should display just the names of each mission
 // display the mission names as <li> in a <ul> with the class name "missions"
 
-app.get('/missions/:index',(req,res)=>{
-  res.render('./missions/index',{
-      mission: marsM[req.params.index]
-  });
-})
+//Middleware
+// app.use(bodyParser.urlencoded({extended:false}));
+
+// // Custom Middleware
+// app.use((req,res,next)=>{
+//   const method = req.method;
+//   const path = req.url;
+//   const timestamp = new Date().toLocaleTimeString();
+//   console.log(`${method} | ${path} | ${timestamp}`);
+//   next(); // Allow request to move on to the next middleware in the chain
+// });
+
+// Basic route check
+
+app.get('/', (req, res) => {
+  // res.sendFile();
+  // res.send('<h1>Welcome to Express Fruits</h1>');
+  res.render('index');
+});
 
 // SHOW Route
 // send data to 'missions/show.ejs' view
 // the view should display all the data for a single mission
 
-
+app.use('/mars',marsCtrl);
 
 // LISTENER
 app.listen(port, function() {

@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>This is mission show page</h1>
-    The <%=mission.name; %> is  operated by <%=mission.operator; %>
+    <ul class="missions">
+        <% for(let i=0;i<missions.length;i++){ %>
+            <li><%= missions[i].name %></li>
+       <% } %>
+    </ul>
 </body>
 </html>
